@@ -278,6 +278,20 @@ function validate_forms() {
 	}
     });
 
+    // ======= NEU =======
+    $('#is_same_dataset_form').validate({
+      rules: {
+        optradio1: {
+          required: true
+        }
+      }
+    });
+
+
+    // ======= END NEU =======
+
+
+
     $('#bdm_form').validate({
 	rules: {
 	    bdm_checkbox: {
