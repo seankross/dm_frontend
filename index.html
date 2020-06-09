@@ -114,38 +114,92 @@
               People with Master's and Ph.D. degrees in engineering often work in industry (such as Microsoft) or in academia (colleges and universities). <br><br>
               Suppose you are looking at the results of a salary survey. Note: everyone surveyed is either is working in either industry or academia.
             </p>
+
             <div class="row">
               <div class="col-sm-6">
-                pic 1
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Badlands_at_the_Blue_Gate%2C_Utah.JPG/1920px-Badlands_at_the_Blue_Gate%2C_Utah.JPG"
+           class="img-responsive" alt="Responsive image"
+           width="307" height="240" />
+                People with Master’s degrees make more money on average than people with PhD degrees.
               </div>
               <div class="col-sm-6">
-                pic 2
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/VU0K1843_%2839985550%29.jpg"
+           class="img-responsive" alt="Responsive image"
+           width="307" height="240" />
+                In both academic and industry jobs, people with Ph.D.'s make more than people with Master's degrees.
               </div>
             </div>
 
-            <p>
+            <p> <br>
               Is it possible that these two graphs are showing data from everyone in the same survey?
             </p>
-            
-            <form id=boulder_form action="javascript:submit_boulder();">
-              <div class="form-group row">
-                <div class="checkbox">
-                  <center>
-                    <label>
-                      <input type=checkbox id=boulder_checkbox name=boulder_checkbox value="">
-                      <b>Click here to confirm you understand the scenario involving you and Blorg.</b></label>
-                    </center>
-                  </div>
-                </div>
+              <form id="is_same_dataset_form" action="javascript:submit_is_same_dataset();">
                 <div class="form-group row">
-                  <center>
-                    <input type=submit id=submit_boulder value=Continue class="btn btn-default" />
-                  </center>
+                  <div class="radio">
+                    <label><input type="radio" name="optradio" checked>Yes</label>
+                  </div>
+                  <div class="radio">
+                    <label><input type="radio" name="optradio">No</label>
+                  </div>
+                  <input class="btn btn-primary" type="submit" value="Submit">
                 </div>
               </form>
 
         </div>
         <!-- END 1st page -->
+
+        <!-- BEGIN explain -->
+        <div id="explain" class="col-sm-12" style="padding-top: 0px">
+          <h1>
+            Explain this dataset
+          </h1>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Badlands_at_the_Blue_Gate%2C_Utah.JPG/1920px-Badlands_at_the_Blue_Gate%2C_Utah.JPG"
+         class="img-responsive" alt="Responsive image"
+         width="307" height="240" />
+              People with Master’s degrees make more money on average than people with PhD degrees.
+            </div>
+            <div class="col-sm-6">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/VU0K1843_%2839985550%29.jpg"
+         class="img-responsive" alt="Responsive image"
+         width="307" height="240" />
+              In both academic and industry jobs, people with Ph.D.'s make more than people with Master's degrees.
+            </div>
+
+          </div>
+              <p>
+                <br><br>
+                Well it turns out these graphs are from the same survey! That is, 1000 people’s salaries are represented in the left graph and the same 1000 people’s salaries are represented in the right graph.
+                <br><br>
+                How is it possible that people with Master's degrees make more money than people with PhD, on average, while at the same time, people with PhDs make more money than people with Masters both inside industry and inside academia?
+                <br><br>
+                Please think of an explanation and type in the box below. It’s ok if you are stumped, but please try to tell us your thinking process, even if you think it’s wrong. We would like a few sentences of explanation.
+                <br><br>
+
+
+              </p>
+              <form id="is_same_dataset_form" action="javascript:submit_explain();">
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">This is the main point of this experiment. Please take it seriously.</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit and finish study</button>
+              </form>
+
+        </div>
+        <!-- END explain -->
+
+        <!-- BEGIN thank you page -->
+        <div id="bye" class="col-sm-12" style="padding-top: 0px">
+          <h1>
+            Thank you for your participation : )
+          </h1>
+          Your response has been submitted. You may close this window now.
+        </div>
+        <!-- END thank you page -->
+
 
         <div id="bdm" class="col-sm-12" style="padding-top: 0px">
           <center>

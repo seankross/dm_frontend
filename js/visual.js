@@ -196,9 +196,10 @@ function hide_all() {
     $('#coarse').hide()
     $('#granular').hide()
     // neue pages
-    // $('#is_same_dataset').hide();
+    $('#is_same_dataset').hide();
+    $('#explain').hide();
+    $('#bye').hide();
 }
-
 
 function show_submit_page(){
     if (elicitation == "bdm")
@@ -390,11 +391,25 @@ function validate_bdm(){
 }
 
 function submit_bdm(){
-    $('#bdm').slideUp(function(){
-	ts_boulder_start = getDateTime();
-	$('#boulder').show();
-    });
+  $('#bdm').slideUp(function(){
+    ts_boulder_start = getDateTime();
+    $('#boulder').show();
+  });
 }
+
+function submit_is_same_dataset(){
+  $('#is_same_dataset').slideUp(function(){
+    $("#explain").show();
+  });
+}
+
+function submit_explain(){
+  $('#explain').slideUp(function(){
+    $("#bye").show();
+  });
+}
+
+
 
 function submit_boulder(){
     $('#boulder').slideUp(function(){
