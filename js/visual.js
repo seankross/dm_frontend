@@ -196,9 +196,9 @@ function hide_all() {
     $('#coarse').hide()
     $('#granular').hide()
     // neue pages
-    $('#is_same_dataset').hide();
-    $('#explain').hide();
-    $('#bye').hide();
+    // $('#is_same_dataset').hide();
+    // $('#explain').hide();
+    // $('#bye').hide();
 }
 
 function show_submit_page(){
