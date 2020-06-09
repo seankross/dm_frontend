@@ -18,7 +18,7 @@ var show_bell_curve; //0 - don't show it, 1 show it
 // standard boulder
 var mu1, lsd1, usd1, lse1, use1
 // special boulder
-var mu2, lsd2, usd2, lse2, use2 
+var mu2, lsd2, usd2, lse2, use2
 
 max_price = 250
 wtp_increment = 25
@@ -183,7 +183,7 @@ function hide_all() {
     $('#boulder').hide()
     $('#standard').hide()
     $('#special').hide()
-    $('#superiority').hide()    
+    $('#superiority').hide()
     $('#final_submit').hide()
     $('#wtp_error').hide()
     $('#standard_error').hide()
@@ -191,10 +191,12 @@ function hide_all() {
     $('#bdm_error').hide()
     $('#coarse_error').hide()
     $('#wtp_granular').hide()
-    $('#granular_error').hide()    
+    $('#granular_error').hide()
     $('#final_confirm').hide()
     $('#coarse').hide()
-    $('#granular').hide()    
+    $('#granular').hide()
+    // neue pages
+    // $('#is_same_dataset').hide();
 }
 
 
@@ -204,15 +206,15 @@ function show_submit_page(){
 
     $('#final_submit').show()
     $('form#submit_to_turk').attr('action', submit_to + '/mturk/externalSubmit');
-    
+
     logger('assignment is')
     logger(assignment_id)
     ts_submitted = getDateTime();
-    
+
     params = {
 	assignmentId: assignment_id,
 	workerId: worker_id,
-	hitId: hit_id, 
+	hitId: hit_id,
 	mu1: mu1,
 	lsd1: lsd1,
 	usd1: usd1,
@@ -224,7 +226,7 @@ function show_submit_page(){
 	lse2: lse2,
 	use2: use2,
 	condition: condition,
-	effect_size: effect_size, 
+	effect_size: effect_size,
 	elicitation: elicitation,
 	text_condition: text_condition,
 	show_bell_curve: show_bell_curve,
@@ -237,14 +239,14 @@ function show_submit_page(){
 	ts_submitted_: ts_submitted, // if you change it to ts_submitted instead of ts_submitted_ this will break
 	wtp_final: wtp_final,
 	coarse_turning_point:coarse_turning_point,
-	granular_turning_point:granular_turning_point,	
+	granular_turning_point:granular_turning_point,
 	superiority_standard:superiority_standard,
 	superiority_special:superiority_special,
 	superiority_raw_standard:superiority_raw_standard,
-	superiority_raw_special:superiority_raw_special	
+	superiority_raw_special:superiority_raw_special
     };
     logger(params)
-    
+
     $.each(params, function (name, val) {
 	$('form#submit_to_turk').append('<input type=hidden name="' + name + '" value="' + val + '" />');
     });
@@ -274,7 +276,7 @@ function validate_forms() {
 	    }
 	}
     });
-    
+
     $('#bdm_form').validate({
 	rules: {
 	    bdm_checkbox: {
@@ -282,7 +284,7 @@ function validate_forms() {
 	    }
 	}
     });
-    
+
     $('#boulder_form').validate({
 	rules: {
 	    boulder_checkbox: {
@@ -290,7 +292,7 @@ function validate_forms() {
 	    }
 	}
     });
-    
+
     $('#standard_form').validate({
 	rules: {
 	    standard_checkbox: {
@@ -298,13 +300,13 @@ function validate_forms() {
 	    }
 	}
     });
-    
+
 }
 
 //generates a table for becker-degroot-marshack ranging from lower to higher going by increment
 function wtp_table(lower, higher, increment, type='not granular', currency='Ice Dollars'){
-    html = ''    
-    for (i = lower; i <= higher; i+=increment) {     
+    html = ''
+    for (i = lower; i <= higher; i+=increment) {
 	html += '<div class="form-group row">'
 	html += 'At a price of '
 	if (currency=='cashmoney'){
@@ -333,7 +335,7 @@ function wtp_table(lower, higher, increment, type='not granular', currency='Ice 
 	html += i.toString()
 	if (type == 'granular'){
 	    html += '_granular'
-	}	
+	}
 	html += '_notbuy" name="'
 	html += i.toString()
 	html += '" value="not buy"> not '
@@ -349,18 +351,19 @@ function wtp_table(lower, higher, increment, type='not granular', currency='Ice 
 }
 
 function submit_consent() {
-    $('#consent').slideUp(function() {
-	ts_bdm_start = getDateTime();
-	//show_next_survey_question()
-	table = wtp_table(1, 5, 1, type='not granular', currency='cashmoney')
-	$('#wtptable').html(table)
-	if (elicitation == 'bdm')
-	    $('#bdm').show();
-	else if (elicitation == 'slider')
-	    $('#boulder').show();
-	else
-	    hide_all();
-    });
+  $('#consent').slideUp(function() {
+    // ts_bdm_start = getDateTime();
+    // //show_next_survey_question()
+    // table = wtp_table(1, 5, 1, type='not granular', currency='cashmoney')
+    // $('#wtptable').html(table)
+    // if (elicitation == 'bdm')
+    // $('#bdm').show();
+    // else if (elicitation == 'slider')
+    // $('#boulder').show();
+    // else
+    // hide_all();
+    $('#is_same_dataset').show();
+  });
 }
 
 function validate_bdm(){
@@ -369,20 +372,20 @@ function validate_bdm(){
 	if (!$(selector).prop('checked')){
 	    logger(i)
 	    $('#bdm_error').html('Make sure you understand how the mechanism works, and then check the forms as if you were willing to pay at most $4 for the widget.')
-	    $('#bdm_error').show()	    
+	    $('#bdm_error').show()
 	    return false;
 	}
     }
     for (i = 5; i <= 5; i+=1) {
 	selector = '#'+i.toString()+'_notbuy'
 	if (!$(selector).prop('checked')){
-	    logger(i)	    
+	    logger(i)
 	    $('#bdm_error').html('Make sure you understand how the mechanism works, and then check the forms as if you were willing to pay at most $4 for the widget.')
-	    $('#bdm_error').show()	    
+	    $('#bdm_error').show()
 	    return false;
 	}
     }
-    $('#bdm_error').hide()	        
+    $('#bdm_error').hide()
     return true;
 }
 
@@ -399,7 +402,7 @@ function submit_boulder(){
 	$('.mu').html(mu1);
 	$('.lsd').html(lsd1);
 	$('.usd').html(usd1);
-	$('.lse').html(lse1);	
+	$('.lse').html(lse1);
 	$('.use').html(use1);
 
 	if (text_condition == "show_viz_stats_only") {
@@ -436,9 +439,9 @@ function submit_standard(){
     $('#standard').slideUp(function(){
 	ts_special_start = getDateTime();
 	$('.mu').html(mu2);
-	$('.lsd').html(lsd2);	
+	$('.lsd').html(lsd2);
 	$('.usd').html(usd2);
-	$('.lse').html(lse2);	
+	$('.lse').html(lse2);
 	$('.use').html(use2);
 	$('.histogram_description').hide()
 	$('.sd_description').hide()
@@ -500,7 +503,7 @@ function submit_standard(){
 	}
 	else if (condition == 4){
 	    html += 'se_plot_rescaled'
-	} 
+	}
 	else if (condition == 5) {
 		html += 'se_plot_with_points'
 	}
@@ -514,7 +517,7 @@ function submit_standard(){
 	}
 
 	html += file_suffix + '" height="400" width="400">'
-	
+
 	$('#graph').html(html)
 
 	$('#payment_bdm,#payment_slider').hide();
@@ -562,7 +565,7 @@ function submit_standard(){
 function submit_wtp(){
     //if coarse_turning_point = max_price + 1, they are willing to buy at any price.
     //if coarse_turning_point = -1, they aren't willing to buy at any price.
-    $('#coarse').hide()            
+    $('#coarse').hide()
     if (coarse_turning_point == max_price + 1){
 	//display the final confirmation
 	html = 'Your response indicates that you would be willing to pay up to '
@@ -622,7 +625,7 @@ function submit_wtp_granular(){
 
 function submit_go_back(){
     //hide the final confirm
-    $('#final_confirm').hide()    
+    $('#final_confirm').hide()
     //hide the granular table
     $('#granular').hide()
     //show the coarse table
@@ -638,8 +641,8 @@ function submit_go_back(){
 function submit_wtp_final_confirm(){
     $('#special').slideUp(function(){
 	if (granular_turning_point == -100){ //edge case
-	    if (coarse_turning_point == -1){ //no price they are willing to buy 
-		wtp_final = -1 //which is different than it being 0.  
+	    if (coarse_turning_point == -1){ //no price they are willing to buy
+		wtp_final = -1 //which is different than it being 0.
 	    }
 	    else if (coarse_turning_point == max_price + 1){
 		wtp_final = 250
@@ -678,7 +681,7 @@ function validate_superiority(){
     superiority_raw_standard = $("#superiority1_estimate").val();
     var superiority1_str = $("#superiority1_estimate").val();
     logger(superiority1_str.match(/[0-9]+/))
-    
+
     if (superiority1_str.match(/[0-9]+/) == null){ //isn't filled out
 	standard_correct = false
     }
@@ -691,15 +694,15 @@ function validate_superiority(){
 	    standard_correct = false
 	}
     }
-    
+
     superiority_raw_special = $("#superiority2_estimate").val();
     var superiority2_str = $("#superiority2_estimate").val();
     logger(superiority2_str.match(/[0-9]+/))
-    
+
     if (superiority2_str.match(/[0-9]+/) == null){
 	special_correct = false
     }
-    else if (superiority2_str.match(/[0-9]+/)[0] != superiority2_str){    
+    else if (superiority2_str.match(/[0-9]+/)[0] != superiority2_str){
 	special_correct = false
     }
     else{
@@ -708,30 +711,30 @@ function validate_superiority(){
 	    special_correct = false
 	}
     }
-    
+
     if (standard_correct == false){
 	document.getElementById("standard_error").innerHTML="<b>Please enter a valid whole number between 0 and 100.</b>";
-	$('#standard_error').show()	
+	$('#standard_error').show()
     }
     else{
-	$('#standard_error').hide()	
+	$('#standard_error').hide()
     }
-    
+
     if (special_correct == false){
 	document.getElementById("special_error").innerHTML="<b>Please enter a valid whole number between 0 and 100.</b>";
-	$('#special_error').show()	
+	$('#special_error').show()
     }
     else{
-	$('#special_error').hide()	
+	$('#special_error').hide()
     }
-    
+
     return (standard_correct && special_correct);
 }
 
 function check_table_checked(type='not granular'){
     //check that every price has a check mark
     if (type == 'not granular'){
-	i_init = 0 
+	i_init = 0
 	i_max = max_price
 	inc = wtp_increment
     }
@@ -742,8 +745,8 @@ function check_table_checked(type='not granular'){
     }
     logger(i_init)
     logger(i_max)
-    logger(inc)    
-    for (i = i_init; i <= i_max; i+=inc) {    
+    logger(inc)
+    for (i = i_init; i <= i_max; i+=inc) {
 	if (type == 'granular'){
 	    selector1 = '#'+i.toString()+'_granular_buy'
 	    selector2 = '#'+i.toString()+'_granular_notbuy'
@@ -762,7 +765,7 @@ function check_table_checked(type='not granular'){
 		$('#coarse_error').html('You must declare whether you would purchase the special boulder at every price on the list.')
 		$('#coarse_error').show()
 	    }
-		return false;	    
+		return false;
 	}
     }
     return true;
@@ -772,7 +775,7 @@ function check_turning_point(type='not granular'){
     //check that there is only one turning point
     buy_or_not = 'buy'
     if (type == 'not granular'){
-	i_init = 0 
+	i_init = 0
 	i_max = max_price
 	inc = wtp_increment
     }
@@ -783,7 +786,7 @@ function check_turning_point(type='not granular'){
     }
     logger(i_init)
     logger(i_max)
-    logger(inc)    
+    logger(inc)
     for (i = i_init; i <= i_max; i+=inc) {
 	if (type == 'granular'){
 	    selector1 = '#'+i.toString()+'_granular_buy'
@@ -796,7 +799,7 @@ function check_turning_point(type='not granular'){
 	if (buy_or_not == 'buy'){
 	    if ($(selector2).prop('checked')){ //this is the first price they won't buy at
 		buy_or_not = 'not'
-		if (type == 'granular'){		
+		if (type == 'granular'){
 		    granular_turning_point = i
 		}
 		else{
@@ -894,19 +897,19 @@ function logger(msg) {
 
 // http://stackoverflow.com/a/19176102/76259
 function getDateTime() {
-    var now     = new Date(); 
+    var now     = new Date();
     var year    = now.getFullYear();
-    var month   = now.getMonth()+1; 
+    var month   = now.getMonth()+1;
     var day     = now.getDate();
     var hour    = now.getHours();
     var minute  = now.getMinutes();
-    var second  = now.getSeconds(); 
+    var second  = now.getSeconds();
     if(month.toString().length == 1) {
         var month = '0'+month;
     }
     if(day.toString().length == 1) {
         var day = '0'+day;
-    }   
+    }
     if(hour.toString().length == 1) {
         var hour = '0'+hour;
     }
@@ -915,8 +918,8 @@ function getDateTime() {
     }
     if(second.toString().length == 1) {
         var second = '0'+second;
-    }   
-    var dateTime = year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second;   
+    }
+    var dateTime = year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second;
      return dateTime;
 }
 

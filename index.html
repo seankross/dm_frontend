@@ -66,6 +66,8 @@
       </center>
     </div>
 
+    <!-- BEGIN consent -->
+    <div class='row'>
     <div id="consent" class="col-sm-offset-1 col-sm-10" style="padding-top: 0px">
 
       <center>
@@ -99,6 +101,51 @@
           </form>
 
         </div>
+        <!-- END consent -->
+
+
+        <!-- BEGIN 1st page -->
+        <div id="is_same_dataset" class="col-sm-12" style="padding-top: 0px">
+          <h1>
+            Who makes more money?
+          </h1>
+
+            <p>
+              People with Master's and Ph.D. degrees in engineering often work in industry (such as Microsoft) or in academia (colleges and universities). <br><br>
+              Suppose you are looking at the results of a salary survey. Note: everyone surveyed is either is working in either industry or academia.
+            </p>
+            <div class="row">
+              <div class="col-sm-6">
+                pic 1
+              </div>
+              <div class="col-sm-6">
+                pic 2
+              </div>
+            </div>
+
+            <p>
+              Is it possible that these two graphs are showing data from everyone in the same survey?
+            </p>
+            
+            <form id=boulder_form action="javascript:submit_boulder();">
+              <div class="form-group row">
+                <div class="checkbox">
+                  <center>
+                    <label>
+                      <input type=checkbox id=boulder_checkbox name=boulder_checkbox value="">
+                      <b>Click here to confirm you understand the scenario involving you and Blorg.</b></label>
+                    </center>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <center>
+                    <input type=submit id=submit_boulder value=Continue class="btn btn-default" />
+                  </center>
+                </div>
+              </form>
+
+        </div>
+        <!-- END 1st page -->
 
         <div id="bdm" class="col-sm-12" style="padding-top: 0px">
           <center>
@@ -392,6 +439,7 @@
                   </form>
                 </center>
               </div>
+            </div>
             </body>
 
             </html>
