@@ -7,11 +7,12 @@ var assignment_id, worker_id, hit_id, submit_to;
 var ts_consent_start,  ts_bdm_start, ts_boulder_start, ts_standard_start, ts_special_start, ts_superiority_start;
 
 //treatment variables
-var condition //1 - SD, 2 - SE, 3 - histogram, 4 - SE with rescaled y axis to match SD, 5 - SE, rescaled, with points, 6 - Vanilla Hops, 7 - Hops with SE, rescaled
-var effect_size //1 - (100->104, d=.25), 2 - (100->116, d=1.0)
-var elicitation; //slider - use a slider; bdm - use becker degroot marshack
-var text_condition; //show_both_stats - show SE and SD statistics in text; show_viz_stats_only - show only the statistics that match the text
-var show_bell_curve; //0 - don't show it, 1 show it
+var condition; // 1: show counts; 2: now show counts
+var condition_set;
+// var effect_size //1 - (100->104, d=.25), 2 - (100->116, d=1.0)
+// var elicitation; //slider - use a slider; bdm - use becker degroot marshack
+// var text_condition; //show_both_stats - show SE and SD statistics in text; show_viz_stats_only - show only the statistics that match the text
+// var show_bell_curve; //0 - don't show it, 1 show it
 
 // mean, lower bound of 95% confidence interval of x, upper bound of 95% confidence interval of x, lower bound of 95% confidence interval of mu, upper bound of 95% confidence interval of mu
 
@@ -30,13 +31,17 @@ coarse_turning_point = -100
 granular_turning_point = -100
 
 function main() {
+
     validate_forms();
+    hide_all();
+
     // create fake assignment id, hit id, and worker id if none provided
     if ($.url().attr('query') == "") {
-	logger('creating fake assignment');
-	var params = create_test_assignment();
-	var query_str = window.location.pathname + '?' + $.param(params);
-	window.history.pushState("", "", query_str);
+      logger('creating fake assignment');
+      // generate fake assignment_id, worker_id, and hit_id
+      var params = create_test_assignment();
+      var query_str = window.location.pathname + '?' + $.param(params);
+      window.history.pushState("", "", query_str);
     }
 
     // parse url parameters
@@ -51,117 +56,59 @@ function main() {
     // grab set of viz conditions from url param
     condition_set = $.url().param('condition_set');
 
-    // grab elicitation mechanism from url param
-    // disabling this for now and manually setting to slider
-    // elicitation = $.url().param('elicitation');
-    elicitation = "slider";
+    // // grab elicitation mechanism from url param
+    // // disabling this for now and manually setting to slider
+    // // elicitation = $.url().param('elicitation');
+    // elicitation = "slider";
 
-    // grab whether to show bell curve or not from url param
-    // disabling this for now and manually setting it to 0
-    // show_bell_curve = $.url().param('show_bell_curve');
-    show_bell_curve = 0;
+    // // grab whether to show bell curve or not from url param
+    // // disabling this for now and manually setting it to 0
+    // // show_bell_curve = $.url().param('show_bell_curve');
+    // show_bell_curve = 0;
 
-    // grab which statistics text to show from url param
-    text_condition = $.url().param('text_condition');
+    // // grab which statistics text to show from url param
+    // text_condition = $.url().param('text_condition');
 
-    // grab true effect size
-    // disabling this for now and manually setting to d = 0.25
-    // effect_size = $.url().param('effect_size');
-    effect_size = 1;
-    mu1 = 100
-    lsd1 = 70
-    usd1 = 130
-    lse1 = 99
-    use1 = 101
+    // // grab true effect size
+    // // disabling this for now and manually setting to d = 0.25
+    // // effect_size = $.url().param('effect_size');
+    // effect_size = 1;
+    // mu1 = 100
+    // lsd1 = 70
+    // usd1 = 130
+    // lse1 = 99
+    // use1 = 101
+    //
+    // mu2 = 104
+    // lsd2 = 74
+    // usd2 = 134
+    // lse2 = 103
+    // use2 = 105
 
-    mu2 = 104
-    lsd2 = 74
-    usd2 = 134
-    lse2 = 103
-    use2 = 105
-
-    // hide everything on the page
-    hide_all();
 
     if (assignment_id == 'ASSIGNMENT_ID_NOT_AVAILABLE') {
-		$('#preview').show();
-		return;
+      $('#preview').show();
+      return; // quit?
     } else {
-	//assign treatment variables
-	if (typeof(condition) == "undefined") {
-	    logger('randomizing se vs. sd condition');
+      //assign treatment variables
+      if (typeof(condition) == "undefined") {
+        logger('randomizing show/not show counts condition');
 
-	    // use 1 and 2 as default conditions
-	    if (typeof(condition_set) === "undefined") {
-		condition_set = '1,2';
-	    }
+        // use 1 and 2 as default conditions
+        if (typeof(condition_set) === "undefined") {
+          condition_set = '1,2';
+        }
 
-	    // convert comma separated string to array
-	    condition_set = condition_set.split(',');
-	    logger(condition_set);
-	    ndx = getRandomInt(0, condition_set.length-1);
-	    condition = condition_set[ndx];
-	}
-
-	if (typeof(effect_size) == "undefined") {
-	    logger('randomizing effect size');
-	    var unif2 = Math.random();
-	    if (unif2 < 1/2){
-		effect_size = 1
-
-		mu1 = 100
-		lsd1 = 70
-		usd1 = 130
-		lse1 = 99
-		use1 = 101
-
-		mu2 = 104
-		lsd2 = 74
-		usd2 = 134
-		lse2 = 103
-		use2 = 105
-	    }
-	    else{
-		effect_size = 2
-
-		mu1 = 100
-		lsd1 = 70
-		usd1 = 130
-		lse1 = 99
-		use1 = 101
-
-		mu2 = 116
-		lsd2 = 86
-		usd2 = 146
-		lse2 = 115
-		use2 = 117
-	    }
-	}
-
-	if (typeof(elicitation) == "undefined") {
-	    logger('randomizing elicitation mechanism');
-	    var unif3 = Math.random();
-	    if (unif3 < 1/2)
-		elicitation = 'slider';
-	    else
-		elicitation = 'bdm';
-	}
-
-	if (typeof(text_condition) == "undefined") {
-	    logger('randomizing text_condition mechanism');
-	    var unif4 = Math.random();
-	    if (unif4 < 1/2)
-		text_condition = 'show_both_stats';
-	    else
-		text_condition = 'show_viz_stats_only';
-	}
-
+        // convert comma separated string to array
+        condition_set = condition_set.split(',');
+        ndx = getRandomInt(0, condition_set.length-1);
+        condition = condition_set[ndx];
+        if (condition == 2)
+          $('p.number-cond').hide();
+      }
     }
-    logger(condition)
-    logger(effect_size)
-    logger(elicitation);
-    logger(text_condition);
-    logger(show_bell_curve);
+
+    logger("condition: " + condition);
 
     // show consent form
     $('#consent').show();
@@ -195,10 +142,11 @@ function hide_all() {
     $('#final_confirm').hide()
     $('#coarse').hide()
     $('#granular').hide()
+
     // neue pages
-    // $('#is_same_dataset').hide();
-    // $('#explain').hide();
-    // $('#bye').hide();
+    $('#is_same_dataset').hide();
+    $('#explain').hide();
+    $('#bye').hide();
 }
 
 function show_submit_page(){
@@ -213,38 +161,38 @@ function show_submit_page(){
     ts_submitted = getDateTime();
 
     params = {
-	assignmentId: assignment_id,
-	workerId: worker_id,
-	hitId: hit_id,
-	mu1: mu1,
-	lsd1: lsd1,
-	usd1: usd1,
-	lse1: lse1,
-	use1: use1,
-	mu2: mu2,
-	lsd2: lsd2,
-	usd2: usd2,
-	lse2: lse2,
-	use2: use2,
-	condition: condition,
-	effect_size: effect_size,
-	elicitation: elicitation,
-	text_condition: text_condition,
-	show_bell_curve: show_bell_curve,
-	ts_consent_start: ts_consent_start,
-	ts_bdm_start: ts_bdm_start,
-	ts_boulder_start: ts_boulder_start,
-	ts_standard_start: ts_standard_start,
-	ts_special_start: ts_special_start,
-	ts_superiority_start: ts_superiority_start,
-	ts_submitted_: ts_submitted, // if you change it to ts_submitted instead of ts_submitted_ this will break
-	wtp_final: wtp_final,
-	coarse_turning_point:coarse_turning_point,
-	granular_turning_point:granular_turning_point,
-	superiority_standard:superiority_standard,
-	superiority_special:superiority_special,
-	superiority_raw_standard:superiority_raw_standard,
-	superiority_raw_special:superiority_raw_special
+      assignmentId: assignment_id,
+      workerId: worker_id,
+      hitId: hit_id,
+      // mu1: mu1,
+      // lsd1: lsd1,
+      // usd1: usd1,
+      // lse1: lse1,
+      // use1: use1,
+      // mu2: mu2,
+      // lsd2: lsd2,
+      // usd2: usd2,
+      // lse2: lse2,
+      // use2: use2,
+      condition: condition,
+      // effect_size: effect_size,
+      // elicitation: elicitation,
+      // text_condition: text_condition,
+      // show_bell_curve: show_bell_curve,
+      ts_consent_start: ts_consent_start,
+      ts_bdm_start: ts_bdm_start,
+      ts_boulder_start: ts_boulder_start,
+      ts_standard_start: ts_standard_start,
+      ts_special_start: ts_special_start,
+      ts_superiority_start: ts_superiority_start,
+      ts_submitted_: ts_submitted, // if you change it to ts_submitted instead of ts_submitted_ this will break
+      wtp_final: wtp_final,
+      coarse_turning_point:coarse_turning_point,
+      granular_turning_point:granular_turning_point,
+      superiority_standard:superiority_standard,
+      superiority_special:superiority_special,
+      superiority_raw_standard:superiority_raw_standard,
+      superiority_raw_special:superiority_raw_special
     };
     logger(params)
 
@@ -271,11 +219,11 @@ function validate_forms() {
     });
 
     $('#consent_form').validate({
-	rules: {
-	    consent_checkbox: {
-		required: true
-	    }
-	}
+      rules: {
+        consent_checkbox: {
+          required: true
+        }
+      }
     });
 
     // ======= NEU =======
@@ -291,30 +239,30 @@ function validate_forms() {
     // ======= END NEU =======
 
 
-
-    $('#bdm_form').validate({
-	rules: {
-	    bdm_checkbox: {
-		required: true
-	    }
-	}
-    });
-
-    $('#boulder_form').validate({
-	rules: {
-	    boulder_checkbox: {
-		required: true
-	    }
-	}
-    });
-
-    $('#standard_form').validate({
-	rules: {
-	    standard_checkbox: {
-		required: true
-	    }
-	}
-    });
+  //
+  //   $('#bdm_form').validate({
+	// rules: {
+	//     bdm_checkbox: {
+	// 	required: true
+	//     }
+	// }
+  //   });
+  //
+  //   $('#boulder_form').validate({
+	// rules: {
+	//     boulder_checkbox: {
+	// 	required: true
+	//     }
+	// }
+  //   });
+  //
+  //   $('#standard_form').validate({
+	// rules: {
+	//     standard_checkbox: {
+	// 	required: true
+	//     }
+	// }
+  //   });
 
 }
 
@@ -412,7 +360,7 @@ function submit_bdm(){
 }
 
 function submit_is_same_dataset(){
-  $('#is_same_dataset').slideUp(function(){
+  $('#is_same_dataset_wrapper').slideUp(function(){
     $("#explain").show();
   });
 }

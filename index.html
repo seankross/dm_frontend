@@ -66,8 +66,8 @@
       </center>
     </div>
 
-    <!-- BEGIN consent -->
     <div class='row'>
+    <!-- BEGIN consent -->
     <div id="consent" class="col-sm-offset-1 col-sm-10" style="padding-top: 0px">
 
       <center>
@@ -121,20 +121,27 @@
                 class="img-responsive" alt="Responsive image"
                 width="307" height="240" />
                 People with Master’s degrees make more money on average than people with PhD degrees.
+                <p class="number-cond">
+                  TODO: ppl count
+                </p>
               </div>
               <div class="col-sm-6">
                 <img src="https://github.com/xiaoyingpu/dm_frontend/blob/master/img/salary-by-work-degree.png?raw=true"
                 class="img-responsive" alt="Responsive image"
                 width="307" height="240" />
                 In both academic and industry jobs, people with Ph.D.'s make more than people with Master's degrees.
+                <p class="number-cond">
+                  TODO: ppl count
+                </p>
               </div>
             </div>
 
 
-            <p> <br>
-              Is it possible that these two graphs are showing data from everyone in the same survey?
-            </p>
-            <div class='col-sm-12'>
+
+            <div class='col-sm-12' id="is_same_dataset_wrapper">
+              <p> <br>
+                Is it possible that these two graphs are showing data from everyone in the same survey?
+              </p>
               <form id="is_same_dataset_form" action="javascript:submit_is_same_dataset();">
                 <div class="form-group row">
                   <label for="optradio1" class="error" style="display:none;">
@@ -155,7 +162,7 @@
 
         <!-- BEGIN explain -->
         <div id="explain" class="col-sm-12" style="padding-top: 0px">
-          <h1>
+          <!-- <h1>
             Explain this dataset
           </h1>
 
@@ -178,7 +185,7 @@
                 This represent x people
               </p>
             </div>
-          </div>
+          </div> -->
               <p>
                 <br><br>
                 Well it turns out these graphs are from the same survey! That is, 1000 people’s salaries are represented in the left graph and the same 1000 people’s salaries are represented in the right graph.
