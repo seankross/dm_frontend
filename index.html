@@ -53,8 +53,7 @@
 
 <body>
   <div class="container">
-    <div id="preview" style="padding-top: 25px">
-      <center>
+    <div id="preview" style="padding-top: 25px; text-align:center">
         We are researchers interested in helping people understand data. If you answer all of the questions, you will earn $.75. This will take about 5 minutes.
         <br/>
         <br/>
@@ -63,455 +62,139 @@
         </b>
         <br/>
         <br/> Otherwise you must accept this HIT to continue.
-      </center>
     </div>
 
     <div class='row'>
-    <!-- BEGIN consent -->
-    <div id="consent" class="col-sm-offset-1 col-sm-10" style="padding-top: 0px">
+      <!-- BEGIN consent -->
+      <div id="consent" class="col-sm-offset-2 col-sm-8" style="padding-top: 0px">
 
-      <center>
-        <h1> Introduction </h1>
-      </center>
-      <p> TODO:
-        In this task, you will answer some questions about a dataset. This task is part of a research project on decision making. We are interested in how well you do on the task without the help of external resources. You will be compensated $0.75 for your participation.	</p>
-        <p>
-          Informed Consent:
-        </p><p>
-          This is a research study. Your responses will help us understand how people understand data and plots. We will not disclose any identifying information in conducting or publishing our research. If you have questions about participating, please contact TODO (email) or TODO (email).
-          <!-- If you consent to participate, please press ‘Next’ to start the study. -->
-        </p>
-        <form id=consent_form action="javascript:submit_consent();">
-          <div class="form-group row">
-            <div class="checkbox">
-              <center>
-                <p>
-                  <b>If you consent to participate, click "Continue" below. If you don't, return the HIT.</b>
-                </p>
-                <label>
-                  <input type=checkbox id=consent_checkbox name=consent_checkbox value="">I agree to this consent form</label>
-                </center>
-              </div>
-            </div>
-            <div class="form-group row">
-              <center>
-                <input type=submit id=submit_consent value=Continue class="btn btn-default" />
-              </center>
-            </div>
-          </form>
-
-        </div>
-        <!-- END consent -->
-
-
-        <!-- BEGIN 1st page -->
-        <div id="is_same_dataset" class="col-sm-12" style="padding-top: 0px">
-          <h1>
-            Who makes more money?
-          </h1>
-
-            <p>
-              People with Master's and Ph.D. degrees in engineering often work in industry (such as Microsoft) or in academia (colleges and universities). <br><br>
-              Suppose you are looking at the results of a salary survey. Note: everyone surveyed is either is working in either industry or academia.
-            </p>
-
-            <div class="row">
-              <div class="col-sm-6">
-                <img src="https://github.com/xiaoyingpu/dm_frontend/blob/master/img/salary-by-work.png?raw=true"
-                class="img-responsive" alt="Responsive image"
-                width="307" height="240" />
-                People with Master’s degrees make more money on average than people with PhD degrees.
-                <p class="number-cond">
-                  TODO: ppl count
-                </p>
-              </div>
-              <div class="col-sm-6">
-                <img src="https://github.com/xiaoyingpu/dm_frontend/blob/master/img/salary-by-work-degree.png?raw=true"
-                class="img-responsive" alt="Responsive image"
-                width="307" height="240" />
-                In both academic and industry jobs, people with Ph.D.'s make more than people with Master's degrees.
-                <p class="number-cond">
-                  TODO: ppl count
-                </p>
-              </div>
-            </div>
-
-
-
-            <div class='col-sm-12' id="is_same_dataset_wrapper">
-              <p> <br>
-                Is it possible that these two graphs are showing data from everyone in the same survey?
-              </p>
-              <form id="is_same_dataset_form" action="javascript:submit_is_same_dataset();"
-              onSubmit = "return log_is_same_dataset();">
-                <div class="form-group row">
-                  <div class="radio">
-                  <!-- <label for="optradio1" class="error" style="display:none;">
-                      * Please pick an option below
-                  </label> -->
-                    <label><input type="radio" name="optradio1" value="1">Yes</label>
-                  </div>
-                  <div class="radio">
-                    <label><input type="radio" name="optradio1" value="0">No</label>
-                  </div>
-                  <input class="btn btn-primary" type="submit" value="Submit">
-                </div>
-              </form>
-            </div>
-        </div>
-        <!-- END 1st page -->
-
-        <!-- BEGIN explain -->
-        <div id="explain" class="col-sm-12" style="padding-top: 0px">
-          <!-- <h1>
-            Explain this dataset
-          </h1>
-
-          <div class="row">
-            <div class="col-sm-6">
-              <img src="https://github.com/xiaoyingpu/dm_frontend/blob/master/img/salary-by-work.png?raw=true"
-              class="img-responsive" alt="Responsive image"
-              width="307" height="240" />
-              People with Master’s degrees make more money on average than people with PhD degrees.
-              <p class="number-cond">
-                This represents x people with masters degree, and TODO
-              </p>
-            </div>
-            <div class="col-sm-6">
-              <img src="https://github.com/xiaoyingpu/dm_frontend/blob/master/img/salary-by-work-degree.png?raw=true"
-              class="img-responsive" alt="Responsive image"
-              width="307" height="240" />
-              In both academic and industry jobs, people with Ph.D.'s make more than people with Master's degrees.
-              <p class="number-cond">
-                This represent x people
-              </p>
-            </div>
-          </div> -->
-              <p>
-                <br><br>
-                Well it turns out these graphs are from the same survey! That is, 1000 people’s salaries are represented in the left graph and the same 1000 people’s salaries are represented in the right graph.
-                <br><br>
-                How is it possible that people with Master's degrees make more money than people with PhD, on average, while at the same time, people with PhDs make more money than people with Masters both inside industry and inside academia?
-                <br><br>
-                Please think of an explanation and type in the box below. It’s ok if you are stumped, but please try to tell us your thinking process, even if you think it’s wrong. We would like a few sentences of explanation.
-                <br><br>
-              </p>
-              <form id="explanation_form" action="javascript:submit_explain();" onSubmit="return log_explanation();">
-                <div class="form-group">
-                  <label for="explanation">This is the main point of this experiment. Please take it seriously.</label>
-                  <textarea class="form-control" id="explanation" name="explanation" rows="5"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary"> Submit explanation</button>
-              </form>
-        </div>
-        <!-- END explain -->
-
-        <!-- BEGIN thank you page -->
-        <div id="bye" class="col-sm-12" style="padding-top: 0px">
-          <h1>
-            Thank you for your participation : )
-          </h1>
-
-          <form id="to_turk" method="post">
-            <button type="submit" class="btn btn-primary"> Submit and return to MTurk</button>
-          </form>
-        </div>
-        <!-- END thank you page -->
-
-
-        <div id="bdm" class="col-sm-12" style="padding-top: 0px">
-          <center>
-            <h1>
-              Payment Explanation
-            </h1>
-          </center>
+        <h1 style="text-align: center"> Introduction </h1>
+        <p> TODO:
+          In this task, you will answer some questions about a dataset. This task is part of a research project on decision making. We are interested in how well you do on the task without the help of external resources. You will be compensated $0.75 for your participation.	</p>
           <p>
-            Later on in this task you will be asked how much you would be willing to pay for a virtual good in an online game. For now, let's say you are considering buying a new product called a widget as part of such a game.
-          </p><p>
-            We will ask you, for each of the possible prices listed below, to please indicate whether you would be willing to:</p>
-            <ol>
-              <li>
-                Pay that amount of money and get the widget
-              </li>
-              <li> Not buy the widget at this price.
-              </li>
-            </ol>
-
-            <p>
-              After you have finished, one of the prices listed below will be selected at random as the price for the widget. If you have indicated you would buy at this price, you will receive the widget and pay this amount of money. If you have indicated that you would not buy a widget at this price, then nothing will happen.
-            </p><p>
-              Notice the following two things: <ol><li>
-                Your decision can have no effect on the price of the widget because the price will be selected at random.
-              </li>
-              <li> It is in your interest to indicate your true preferences at each of the possible prices listed below.</li>
-            </ol>
+            Informed Consent:
           </p>
           <p>
-            Let's say you were willing to pay at most $3 for the widget. Then you would check the button for 'buy' at the prices of $1, $2, and $3. You would check the button for 'not buy' for the prices of $4 and $5.</p><p>
-
-              To verify that you understand this process, please fill out the form below assuming that you are willing to pay at most $4 for the widget.	</p>
-
-              <form id=bdm_form action="javascript:submit_bdm();" onSubmit="return validate_bdm()">
-                <!--
-                adding col-sm-12 makes the radio buttons unclickable
-                <div id="wtptable" class="col-sm-12 col-sm-offset-1"></div>
-              -->
-              <div id="wtptable" class="col-sm-offset-1"></div>
-              <div class="form-group row">
-                <div class="checkbox">
-                  <center>
-                    <label>
-
-                      <input type=checkbox id=bdm_checkbox name=bdm_checkbox value="">
-                      <b>Click here to confirm you understand how this mechanism works, and that you checked the boxes as if you were willing to pay at most $4 for the widget.</b>
-
-                    </label>
-                  </center>
+            This is a research study. Your responses will help us understand how people understand data and plots. We will not disclose any identifying information in conducting or publishing our research. If you have questions about participating, please contact TODO (email) or TODO (email).
+            <!-- If you consent to participate, please press ‘Next’ to start the study. -->
+          </p>
+          <form id=consent_form action="javascript:submit_consent();">
+            <div class="form-group row">
+              <div class="checkbox text-center" >
+                  <p>
+                    <b>If you consent to participate, click "Continue" below. If you don't, return the HIT.</b>
+                  </p>
+                  <label>
+                    <input type=checkbox id=consent_checkbox name=consent_checkbox value="">I agree to this consent form</label>
                 </div>
               </div>
-
-              <div class="form-group row">
-                <center>
-                  <div id="bdm_error" class="error-message"></div>
-                  <input type=submit id=submit_bdm value=Continue class="btn btn-default" />
-                </center>
+              <div class="form-group row text-center">
+                <!-- <center> -->
+                  <input type=submit id=submit_consent value=Continue class="btn btn-default" />
+                <!-- </center> -->
               </div>
             </form>
 
           </div>
+          <!-- END consent -->
 
-          <div id="boulder" class="col-sm-12" style="padding-top:0px">
-            <center>
+
+          <!-- BEGIN 1st page -->
+          <div id="is_same_dataset" class="col-sm-12" style="padding-top: 0px">
+            <div class="row">
               <h1>
-                Boulder Sliding
+                Who makes more money?
               </h1>
-            </center>
-            <p>
-              You are an athlete in the up and coming sport of boulder sliding, where the goal is to slide your boulder farther than your competitor's boulder.
-            </p><p>
-              You are heading into a championship match against another athlete named Blorg.
-            </p><p>
-              In the championship match, you and Blorg each have one chance to slide your respective boulders.
-            </p><p>
-              Whoever slides their boulder farther wins 250 Ice Dollars.
-            </p>
-            <h3><b>
-              A Decision
-            </h3></b>
-            <p>
-              There is a special boulder you can rent that tends to slide farther than the standard boulder that Blorg will use.
-            </p><p>
-              It is perfectly within the rules for you to rent this boulder.
-            </p><p>
-              <b>
-                You can be certain that Blorg WILL NOT rent a special boulder.
-              </b>
-            </p><p>
-              However, the rental is good for only one use and it is not free.
-            </p><p>
-              We’re going to ask you how much you would be willing to pay for the special boulder, but before we do you’ll see some statistics to aid in your decision.
-            </p>
 
-            <form id=boulder_form action="javascript:submit_boulder();">
-              <div class="form-group row">
-                <div class="checkbox">
-                  <center>
-                    <label>
-                      <input type=checkbox id=boulder_checkbox name=boulder_checkbox value="">
-                      <b>Click here to confirm you understand the scenario involving you and Blorg.</b></label>
-                    </center>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <center>
-                    <input type=submit id=submit_boulder value=Continue class="btn btn-default" />
-                  </center>
-                </div>
-              </form>
+              <p>
+                People with master's and Ph.D. degrees often work in either industry (companies) or in academia (colleges and universities)
+                <br><br>
+                Imagine you were presented with the following two charts that show information about the salaries that people earn in different work settings and with different degrees. The charts were generated from a salary survey. The points in each chart show average salaries and the bars represent margins of error (95% confidence intervals) around the averages.
+              </p>
             </div>
-            <div id="standard" class="col-sm-12" style="padding-top: 0px">
-              <div id="standardstats" class="col-sm-8" style="padding-top: 0px">
-                <h1>
-                  Some statistics about you and Blorg
-                </h1>
-                <p>
-                  Here are some statistics about you and Blorg.
+
+            <div class="row">
+              <div class="col-sm-5">
+                <img src="https://github.com/xiaoyingpu/dm_frontend/blob/master/img/salary-by-work.png?raw=true"
+                class="img-responsive" alt="Responsive image"/>
+                This chart shows that <span style="font-weight: bold">people with master’s degrees make more money on average than people with PhD degrees</span>.
+                <span class="number-cond">
+                  It contains survey responses from 2100 people with master’s degrees and 900 people with PhD degrees.
+                </span>
+              </div>
+              <div class="col-sm-2"></div>
+
+              <div class="col-sm-5">
+                <img src="https://github.com/xiaoyingpu/dm_frontend/blob/master/img/salary-by-work-degree.png?raw=true"
+                class="img-responsive" alt="Responsive image" />
+                This chart shows that within both academic and industry work settings, <span style="font-weight: bold">people with master's degrees make less on average money on average than people with Ph.D. degrees</span>.
+                <span class="number-cond">
+                  It contains survey responses from 2100 people with master’s degrees (1800 who work in industry and 300 who work in academia) and 900 people with PhD degrees (300 who work in industry and 600 who work in academia).
+                </span>
+              </div>
+            </div>
+            <div class='row' id="is_same_dataset_wrapper">
+              <form id="is_same_dataset_form" action="javascript:submit_is_same_dataset();"
+              onSubmit = "return log_is_same_dataset();">
+              <div class="form-group col-sm-12">
+                <p> <br>
+                  Given the trends in the two charts, is it possible that these two charts are made up of the exact same data, just grouped differently?
                 </p>
-                <ul>
-                  <li>
-                    <b> Your average sliding distance with a standard-issue boulder</b>: In the past 1,000 times when you’ve slid a standard-issue boulder, you’ve attained an <b>average</b> distance of <span class="mu"> </span> meters.
-                  </li><li id="sd_standard">
-                    <b>Variation in your sliding distances with a standard-issue boulder</b>: Roughly speaking, 95% of your past 1,000 slides were between <span class="lsd"> </span> and <span class="usd"> </span> meters, with approximately equal percentages of slides falling short of <span class="lsd"> </span> meters or long of <span class="usd"> </span> meters<span id="bell_text_standard">, as shown in the graph.  This shape is known as a bell curve</span>.
-                  </li><li id="se_standard">
-                    <b>Uncertainty in estimating your true average sliding distance with a standard-issue boulder</b>: Based on your past 1,000 slides, a 95% confidence interval on your <b>average</b> sliding distance with a standard-issue boulder is <span class="lse"> </span> to <span class="use"> </span> meters. A 95% confidence interval is constructed such that if we watched many such sessions of 1,000 slides and repeated this process, 95% of the constructed intervals would contain your true average.
-                  </li><li>
-                    In terms of these statistics, <b>you and Blorg are identical</b>. There is no reason to believe that one of you has an advantage over the other in the upcoming competition if you both use a standard-issue boulder.</li>
-                  </ul>
-                </div>
-                <div id="bell" class="col-sm-4" style="padding-top: 0px">
-                  <img src="static/N-1000_mu1-100_mu2-104_sigma-15.3061_normal_dist.png" alt="Plot of bell curve" height="400" width="400">
-                </div>
-
-                <form id=standard_form action="javascript:submit_standard();">
-                  <div class="form-group row">
-                    <div class="checkbox">
-                      <center>
-                        <label>
-                          <input type=checkbox id=standard_checkbox name=standard_checkbox value="">
-                          <b>Click here to confirm you understand the statistics about you and Blorg.</b></label>
-                        </center>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <center>
-                        <input type=submit id=submit_standard value=Continue class="btn btn-default" />
-                      </center>
-                    </div>
-                  </form>
-                </div>
-
-                <div id="special" class="col-sm-12" style="padding-top: 0px">
-                  <div id="statistics" class="col-sm-8" style="padding-top: 0px">
-                    <h1>
-                      Some statistics about the special boulder
-                    </h1>
-                    <p>
-                      And here are some statistics about the special boulder, based on estimates for an athlete like you.</p>
-                      <ul><li>
-                        <b>Your average sliding distance with the special boulder</b>: If you were to slide the special boulder 1,000 times, you would attain an <b>average</b> distance of <span class="mu"> </span> meters. <span class="histogram_description"> <b>The graph shows your sliding distances for 1,000 slides without the special boulder (top) and with the special boulder (bottom), where the height of each bar indicates the number of slides that would attain a distance in the corresponding range. </b> </span>
-                      </li><li id="sd_special">
-                        <b>Variation in your sliding distances with the special boulder</b>: Roughly speaking, 95% of your next 1,000 slides would be between <span class="lsd"> </span> and <span class="usd"> </span> meters, with approximately equal percentages of slides falling short of <span class="lsd"> </span> meters or long of <span class="usd"> </span> meters. <span id="bell_text_special">These slides are also distributed according to a bell curve.</span> <span class="sd_description"> <b>The graph shows your average distance and this interval without the special boulder (left) and with the special boulder (right), as indicated by the black points and vertical bars.</b></span><span class="hops_description_sd"> <b>The horizontal lines in each frame of the graph show one pair of distances we might see for an individual slide without the special boulder (left) and with the special boulder (right).</b></span>
-                      </li><li id="se_special">
-                        <b>Uncertainty in estimating your true average sliding distance with the special boulder</b>: A 95% confidence interval on your <b>average</b> sliding distance with a special boulder is <span class="lse"> </span> to  <span class="use"> </span> meters. A 95% confidence interval is constructed such that if we watched many such sessions of 1,000 slides and repeated this process, 95% of the constructed intervals would contain your true average. <span class="se_description"> <b>The graph shows your average distance and this interval without the special boulder (left) and with the special boulder (right), as indicated by the black points and vertical bars.</b></span> <span class="hops_description_se"> <b>In addition, the horizontal lines in each frame of the graph show one pair of distances we might see for an individual slide without the special boulder (left) and with the special boulder (right).</b></span><span class="points_description"> <b>In addition, the grey points on the graph show distances we might see for individual slides without the special boulder (left) and with the special boulder (right).</b></span>
-                      </li>
-                    </div>
-                    <div id="graph" class="col-sm-4" style="padding-top: 0px">
-
-                    </div>
-
-                    <div id="payment_slider" class="col-sm-12" style="padding-top:5px">
-                      <h1> Decision time </h1>
-                      <p>
-                        Given that you’ll win 250 Ice Dollars if you beat Blorg, but nothing if you lose, what is the most you would you be willing to pay to use the special boulder?
-                      </p>
-
-                      <form id="slider_form" action="javascript:submit_wtp_slider()" onSubmit="return validate_wtp_slider()">
-
-                        <div class="col-sm-6 col-sm-offset-3">
-                          <label for="wtp_slider" class="pull-left">0</label>
-                          <label for="" class="pull-right">250</label>
-                          <!--
-                          <input type="range" min="0" max="250" value="250" step="1" class="slider" id="wtp_slider">
-                        -->
-                        <input id="wtp_slider" type="text" data-slider-min="0" data-slider-max="250" data-slider-step="1" data-slider-value="250"/>
-                        <div id="wtp_slider_error" class="error-message" style="display: none"></div><br/>
-
-                      </div>
-
-                      <div class="col-sm-12" style="padding-top: 25px">
-                        <p>
-                          Your response indicates that you would be willing to pay up to <span id="wtp_val">250</span> Ice Dollars (but no more) for the special boulder. Click "Continue" below if this is correct.'
-                        </p>
-
-                        <center>
-                          <input type=submit id=submit_wtp_slider value=Continue class="btn btn-default" />
-                        </center>
-                      </div>
-
-                    </form>
-                  </div>
-
-                  <div id="payment_bdm" class="col-sm-12" style="padding-top:5px">
-                    <h1> Decision time </h1>
-                    <p>
-
-                      Given that you’ll win 250 Ice Dollars if you beat Blorg, but nothing if you lose, what is the most you would you be willing to pay to use the special boulder?
-                    </p><p>
-                      To make this interesting, we will give you 250 Ice Dollars right now which you can choose to spend to rent the special boulder. If you win, as mentioned, you will get an additional 250 Ice Dollars. At the end of the HIT, you will be paid a bonus in real money proportional to how many Ice Dollars you have remaining. Your bonus will be between $0.00 and $0.25, and will be delivered within 7 days of completing the HIT.
-                    </p>
-
-                    For each of the possible prices listed below, to please indicate whether you wish to:
-                    <ol>
-                      <li>
-                        Pay that many Ice Dollars and rent the special boulder.
-                      </li>
-                      <li> Not rent the special boulder at this price.
-                      </li>
-                    </ol>
-
-                    <p>
-                      Recall that after you have finished, one of the prices listed below will be selected at random.  If you have indicated you will rent at this price, you will rent the special boulder and pay this amount of money.  If you have indicated that you will not rent the special boulder at this price, then nothing will happen.
-                    </p><p>
-                      Also recall the following two things: <ol><li>
-                        Your decision can have no effect on the price actually used because the price will be selected at random.</li>
-                        <li> It is in your interest to indicate your true preferences at each of the possible prices listed below.</li>
-                      </ol>
-                      <b> Please select one option from each row below. </b>
-                    </p>
-                    <div id="coarse" class="col-sm-12" style="padding-top: 0px">
-                      <form id="wtp_form" action="javascript:submit_wtp()" onSubmit="return validate_wtp()">
-                        <center>
-                          <div id="coarse_wtp">
-                          </div>
-                        </center>
-                      </form>
-                    </div>
-
-                    <div id="granular" class="col-sm-12" style="padding-top: 0px">
-                      <center>
-                        <form id="granular_form" action="javascript:submit_wtp_granular()" onSubmit="return validate_granular()">
-                          <div id="wtp_granular">
-                          </div>
-                        </form>
-                      </center>
-                    </div>
-
-                    <div id="final_confirm" class="col-sm-12" style="padding-top: 0px">
-                    </div>
-                  </div>
-
-                </div>
-                <div id="superiority" class="col-sm-12" style="padding-top: 0px">
-                  <h1> Some estimation </h1>
-
-                  <form class="form-inline" id="q_form" action="javascript:submit_superiority()" onSubmit="return validate_superiority()">
-                    If you were to compete with Blorg 100 times where <b>you had a standard-issue boulder</b> and <b>Blorg had a standard-issue boulder</b>, what is your best estimate of the number of times you would win?
-                    <center>
-                      <input type="text" class="form-control mb-1 mr-sm-2 mb-sm-0" id="superiority1_estimate" autocomplete="off">
-                    </center>
-                    <div id="standard_error" class="error-message"></div><br/>
-                    If you were to compete with Blorg 100 times where <b>you had the special boulder</b> and <b>Blorg had a standard-issue boulder</b>, what is your best estimate of the number of times you would win?
-                    <center>
-                      <input type="text" class="form-control mb-1 mr-sm-2 mb-sm-0" id="superiority2_estimate" autocomplete="off">
-                    </center>
-                    <div id="special_error" class="error-message"></div>
-                  </br>
-                  <center>
-                    <input type=submit id=submit_superiority value=Submit class="btn btn-default" />
-                  </center>
-                </form>
+                <div class="radio">
+                  <!-- <label for="optradio1" class="error" style="display:none;">
+                  * Please pick an option below
+                </label> -->
+                <label><input type="radio" name="optradio1" value="1">Yes</label>
               </div>
-
-              <div id="final_submit" class="col-sm-12" style="padding-top: 0px">
-                <center>
-                  <h1> Thank you! </h1>
-
-                  <p id="bdm_thanks" style="display: none">
-                    Once you complete the HIT we will draw a random price for the boulder, determine the outcome of the match between you and Blorg, and send any bonuses your way within 7 days.  As a reminder, your bonus will vary between $.00 and $.25, and will depend on how many Ice Dollars you have remaining after the match.
-                  </p>
-                  <p> You must click the submit button to turn in your answers and complete the HIT. </p>
-                  <form id="submit_to_turk" method="post">
-                    <div class="col-sm-12" style="padding: 12px">
-                      <label for="feedback"> Please leave feedback or comments below (optional).</label>
-                      <textarea class="form-control" id="feedback" rows="5" name="feedback"></textarea>
-                    </div>
-                    <div class="form-group row">
-                      <input type=submit id=turk_form value="Submit answers back to turk"  class="btn btn-default" />
-                    </div>
-                  </form>
-                </center>
+              <div class="radio">
+                <label><input type="radio" name="optradio1" value="0">No</label>
               </div>
+              <input class="btn btn-primary" type="submit" value="Submit">
             </div>
-            </body>
+          </form>
+        </div>
+      </div>
+      <!-- END 1st page -->
 
-            </html>
+      <!-- BEGIN explain -->
+      <div id="explain" class="col-sm-12" style="padding-top: 0px">
+        <p>
+          <br><br>
+
+          <span style="font-weight: bold">It turns out that these two charts are made up of the exact same data, just grouped differently.</span> That is, 3,000 people’s salaries are represented in the left graph and the same 3,000 people’s salaries are represented in the right graph.
+          <br><br>
+          It is sometimes considered a <span style="font-weight: bold">paradox</span> that that people with master's degrees make more money than people with PhD, on average, while at the same time, people with PhDs make more money than people with master's both inside industry and inside academia?
+
+          <br><br>
+          How do you think it's possible that both of these statements are true? Please think of an explanation and type in the box below.
+
+          <br><br>
+          Even if you have no idea how it's possible, we want you to guess something (do not say "I don't know"), even if you feel it is wrong. We would like a few sentences of explanation. 
+          <br><br>
+        </p>
+        <form id="explanation_form" action="javascript:submit_explain();" onSubmit="return log_explanation();">
+          <div class="form-group">
+            <label for="explanation">This is the main point of this experiment. Please take it seriously.</label>
+            <textarea class="form-control" id="explanation" name="explanation" rows="5"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary"> Submit explanation</button>
+        </form>
+      </div>
+      <!-- END explain -->
+
+      <!-- BEGIN thank you page -->
+      <div id="bye" class="col-sm-12" style="padding-top: 0px">
+        <h1>
+          Thank you for your participation : )
+        </h1>
+
+        <form id="to_turk" method="post">
+          <button type="submit" class="btn btn-primary"> Submit and return to MTurk</button>
+        </form>
+      </div>
+      <!-- END thank you page -->
+
+    </div>
+  </div>
+</body>
+</html>
