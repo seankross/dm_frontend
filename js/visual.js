@@ -56,11 +56,14 @@ function main() {
         ndx = getRandomInt(0, condition_set.length-1);
         condition = condition_set[ndx];
 
-        // apply condition
-        if (condition == 2)
-          $('span.number-cond').hide();
+
       }
     }
+    // apply condition
+    if (condition == 2){
+      $('span.number-cond').hide();
+    }
+
 
     logger("condition: " + condition + " out of " + condition_set);
 
@@ -113,7 +116,7 @@ function show_submit_page(){
     logger(params);
 
     $.each(params, function (name, val) {
-      $('form#submit_to_turk').append('<input type=hidden name="' + name + '" value="' + val + '" />');
+      $('form#to_turk').append('<input type=hidden name="' + name + '" value="' + val + '" />');
     });
 }
 
