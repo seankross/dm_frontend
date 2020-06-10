@@ -276,32 +276,6 @@ function validate_forms() {
 
     // ======= END NEU =======
 
-
-  //
-  //   $('#bdm_form').validate({
-	// rules: {
-	//     bdm_checkbox: {
-	// 	required: true
-	//     }
-	// }
-  //   });
-  //
-  //   $('#boulder_form').validate({
-	// rules: {
-	//     boulder_checkbox: {
-	// 	required: true
-	//     }
-	// }
-  //   });
-  //
-  //   $('#standard_form').validate({
-	// rules: {
-	//     standard_checkbox: {
-	// 	required: true
-	//     }
-	// }
-  //   });
-
 }
 
 //generates a table for becker-degroot-marshack ranging from lower to higher going by increment
@@ -932,8 +906,9 @@ function create_test_assignment() {
 /* HELPER FUNCTIONS BELOW */
 
 function logger(msg) {
-    if (DEBUG_STATE)
-	console.log(msg);
+  if (DEBUG_STATE){
+    console.log(msg);
+  }
 }
 
 // http://stackoverflow.com/a/19176102/76259
