@@ -80,3 +80,7 @@ label.error {
 .slider.slider-horizontal{
     width: 100%
 }
+
+body{
+  font-size: 15px;
+}
