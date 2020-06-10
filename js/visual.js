@@ -4,7 +4,7 @@ var DEBUG_STATE = true;
 // subject-level variables as globals
 var assignment_id, worker_id, hit_id, submit_to;
 
-var ts_consent_start,  ts_bdm_start, ts_boulder_start, ts_standard_start, ts_special_start, ts_superiority_start;
+var ts_consent_start,  ts_bdm_start, ts_boulder_start, ts_standard_start, ts_special_start, ts_superiority_start, ts_explain_start, ts_is_same_dataset_start;
 
 //treatment variables
 var condition; // 1: show counts; 2: now show counts
@@ -16,19 +16,22 @@ var condition_set;
 
 // mean, lower bound of 95% confidence interval of x, upper bound of 95% confidence interval of x, lower bound of 95% confidence interval of mu, upper bound of 95% confidence interval of mu
 
-// standard boulder
-var mu1, lsd1, usd1, lse1, use1
-// special boulder
-var mu2, lsd2, usd2, lse2, use2
-
-max_price = 250
-wtp_increment = 25
+// // standard boulder
+// var mu1, lsd1, usd1, lse1, use1
+// // special boulder
+// var mu2, lsd2, usd2, lse2, use2
+//
+// max_price = 250
+// wtp_increment = 25
 
 // dependent variables
-var wtp_final, superiority_standard, superiority_special, superiority_raw_standard, superiority_raw_special;
-var coarse_turning_point, granular_turning_point;
-coarse_turning_point = -100
-granular_turning_point = -100
+var is_same_dataset_choice;
+var explanation_text;
+
+// var wtp_final, superiority_standard, superiority_special, superiority_raw_standard, superiority_raw_special;
+// var coarse_turning_point, granular_turning_point;
+// coarse_turning_point = -100
+// granular_turning_point = -100
 
 function main() {
 
@@ -113,6 +116,7 @@ function main() {
     // show consent form
     $('#consent').show();
     ts_consent_start = getDateTime();
+    logger("ts_consent_start: " + ts_consent_start);
 }
 
 
@@ -144,20 +148,20 @@ function hide_all() {
     $('#granular').hide()
 
     // neue pages
-    // $('#is_same_dataset').hide();
-    // $('#explain').hide();
-    // $('#bye').hide();
+    $('#is_same_dataset').hide();
+    $('#explain').hide();
+    $('#bye').hide();
 }
 
 function show_submit_page(){
-    if (elicitation == "bdm")
-	$('bdm_thanks').show();
+    // if (elicitation == "bdm")
+	  //  $('bdm_thanks').show();
 
-    $('#final_submit').show()
-    $('form#submit_to_turk').attr('action', submit_to + '/mturk/externalSubmit');
+    // $('#final_submit').show()
+    $('#bye').show();
+    $('form#to_turk').attr('action', submit_to + '/mturk/externalSubmit');
 
-    logger('assignment is')
-    logger(assignment_id)
+    logger('assignment is ' + assignment_id);
     ts_submitted = getDateTime();
 
     params = {
@@ -175,29 +179,33 @@ function show_submit_page(){
       // lse2: lse2,
       // use2: use2,
       condition: condition,
+      is_same_dataset_choice: is_same_dataset_choice,
+      explanation_text: explanation_text,
       // effect_size: effect_size,
       // elicitation: elicitation,
       // text_condition: text_condition,
       // show_bell_curve: show_bell_curve,
       ts_consent_start: ts_consent_start,
-      ts_bdm_start: ts_bdm_start,
-      ts_boulder_start: ts_boulder_start,
-      ts_standard_start: ts_standard_start,
-      ts_special_start: ts_special_start,
-      ts_superiority_start: ts_superiority_start,
+      ts_is_same_dataset_start: ts_is_same_dataset_start,
+      ts_explain_start: ts_explain_start,
+      // ts_bdm_start: ts_bdm_start,
+      // ts_boulder_start: ts_boulder_start,
+      // ts_standard_start: ts_standard_start,
+      // ts_special_start: ts_special_start,
+      // ts_superiority_start: ts_superiority_start,
       ts_submitted_: ts_submitted, // if you change it to ts_submitted instead of ts_submitted_ this will break
-      wtp_final: wtp_final,
-      coarse_turning_point:coarse_turning_point,
-      granular_turning_point:granular_turning_point,
-      superiority_standard:superiority_standard,
-      superiority_special:superiority_special,
-      superiority_raw_standard:superiority_raw_standard,
-      superiority_raw_special:superiority_raw_special
+      // wtp_final: wtp_final,
+      // coarse_turning_point:coarse_turning_point,
+      // granular_turning_point:granular_turning_point,
+      // superiority_standard:superiority_standard,
+      // superiority_special:superiority_special,
+      // superiority_raw_standard:superiority_raw_standard,
+      // superiority_raw_special:superiority_raw_special
     };
-    logger(params)
+    logger(params);
 
     $.each(params, function (name, val) {
-	$('form#submit_to_turk').append('<input type=hidden name="' + name + '" value="' + val + '" />');
+      $('form#submit_to_turk').append('<input type=hidden name="' + name + '" value="' + val + '" />');
     });
 }
 
@@ -356,6 +364,8 @@ function submit_consent() {
     // else
     // hide_all();
     $('#is_same_dataset').show();
+    ts_is_same_dataset_start = getDateTime();
+    logger("ts_is_same_dataset_start: " + ts_is_same_dataset_start );
   });
 }
 
@@ -389,18 +399,7 @@ function submit_bdm(){
   });
 }
 
-function submit_is_same_dataset(){
-  $('#is_same_dataset_wrapper').slideUp(function(){
-    $("#explain").show();
-  });
-}
 
-function submit_explain(){
-  $('#explain').slideUp(function(){
-    $('#is_same_dataset').hide();
-    $("#bye").show();
-  });
-}
 
 
 
@@ -682,6 +681,40 @@ function submit_superiority(){
 	//$('#final_submit').show();
     });
 }
+
+
+function submit_is_same_dataset(){
+  $('#is_same_dataset_wrapper').slideUp(function(){
+    ts_explain_start = getDateTime();
+    logger("ts_explain_start: " + ts_explain_start);
+    $("#explain").show();
+    // show_submit_page();
+  });
+}
+
+
+function submit_explain(){
+  $('#explain').slideUp(function(){
+    $('#is_same_dataset').hide();
+    show_submit_page();
+  });
+}
+
+function log_is_same_dataset(){
+    is_same_dataset_choice = $("input[name='optradio1']:checked").val();
+    logger("choice: " + is_same_dataset_choice);
+    return true;
+}
+
+function log_explanation(){
+  explanation_text = $("textarea#explanation").val();
+  logger("explanation: " + explanation_text);
+  ts_submitted = getDateTime();
+  logger("ts_submitted: " + ts_submitted);
+  return true;
+}
+
+
 
 function validate_superiority(){
     var standard_correct = true
