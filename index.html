@@ -66,7 +66,7 @@
 
     <div class='row'>
       <!-- BEGIN consent -->
-      <div id="consent" class="col-sm-offset-2 col-sm-8" style="padding-top: 0px">
+      <div id="consent" class="col-sm-offset-1 col-sm-10" style="padding-top: 0px">
 
         <h1 style="text-align: center"> Introduction </h1>
 					<!-- <div class="collapse" id="collapseExample" > -->
@@ -137,9 +137,9 @@
               </h1>
 
               <p>
-                People with master's and Ph.D. degrees often work in either industry (companies) or in academia (colleges and universities).
+                People with master's and PhD degrees often work in either industry (companies) or in academia (colleges and universities).
                 <br><br>
-                Imagine you were presented with the following two charts that show information about the salaries that people earn in different work settings and with different degrees. The charts were generated from a salary survey. The points in each chart show average salaries and the bars represent margins of error (95% confidence intervals) around the averages.
+                Imagine you were presented with the following two charts that show information about the salaries that people earn in different work settings and with different degrees. The charts were generated from a salary survey of 3,000 people. The points in each chart show average salaries and the bars represent margins of error (95% confidence intervals) around the averages.
               </p>
             </div>
 
@@ -149,7 +149,7 @@
                 class="img-responsive" alt="Responsive image"/>
                 This chart shows that <span style="font-weight: bold">people with master’s degrees make more money on average than people with PhD degrees</span>.
                 <span class="number-cond">
-                  It contains survey responses from 2100 people with master’s degrees and 900 people with PhD degrees.
+                  It contains survey responses from 2,100 people with master’s degrees and 900 people with PhD degrees.
                 </span>
               </div>
               <div class="col-sm-2"></div>
@@ -157,9 +157,9 @@
               <div class="col-sm-5">
                 <img src="https://github.com/xiaoyingpu/dm_frontend/blob/master/img/salary-by-work-degree.png?raw=true"
                 class="img-responsive" alt="Responsive image" />
-                This chart shows that within both academic and industry work settings, <span style="font-weight: bold">people with master's degrees make less on average money on average than people with Ph.D. degrees</span>.
+                This chart shows that within both academic and industry work settings, <span style="font-weight: bold">people with master's degrees make less money on average than people with PhD degrees</span>.
                 <span class="number-cond">
-                  It contains survey responses from 2100 people with master’s degrees (1800 who work in industry and 300 who work in academia) and 900 people with PhD degrees (300 who work in industry and 600 who work in academia).
+                  It contains survey responses from 2,100 people with master’s degrees (1,800 who work in industry and 300 who work in academia) and 900 people with PhD degrees (300 who work in industry and 600 who work in academia).
                 </span>
               </div>
             </div>
@@ -194,13 +194,20 @@
           <span style="font-weight: bold">It turns out that these two charts are made up of the exact same data, just grouped differently.</span> That is, 3,000 people’s salaries are represented in the left graph and the same 3,000 people’s salaries are represented in the right graph.
           <br><br>
 
-          It is sometimes considered a <span style="font-weight: bold">paradox</span> that that people with master's degrees make more money than people with PhD, on average, while at the same time, people with PhDs make more money than people with master's both inside industry and inside academia?
+          It seems to be a <span style="font-weight: bold">paradox</span> when both are true:
+          <!-- It is sometimes considered a <span style="font-weight: bold">paradox</span> that: -->
+           <!-- people with master's degrees make more money than people with PhD degrees on average, while at the same time, master's degree holders make less money than people with PhD's, both inside industry and inside academia? -->
+
+          <ol>
+            <li> people with master's degrees make <span style="font-weight:bold">more</span> money than people with PhD degrees on average.</li>
+            <li> people with master's degrees make <span style="font-weight: bold">less</span> money than people with PhD degrees on average, both inside industry and inside academia.
+            </li>
+          </ol>
+          <br>
+          How do you think it's possible that both of these statements are true? Please think of an explanation and type it in the box below.
 
           <br><br>
-          How do you think it's possible that both of these statements are true? Please think of an explanation and type in the box below.
-
-          <br><br>
-          Even if you have no idea how it's possible, we want you to guess something (do not say "I don't know"), even if you feel it is wrong. We would like a few sentences of explanation. 
+          Even if you have no idea how it's possible, we want you to guess something (do not say "I don't know"), even if you feel it is wrong. We would like a few sentences of explanation; low-effort answers may be rejected.
           <br><br>
         </p>
         <form id="explanation_form" action="javascript:submit_explain();" onSubmit="return log_explanation();">
@@ -216,12 +223,15 @@
       <!-- BEGIN thank you page -->
       <div id="bye" class="col-sm-12" style="padding-top: 0px">
         <h1>
-          Thank you for your participation : )
+          You must click below to complete the study
         </h1>
 
+        <br><br>
         <form id="to_turk" method="post">
           <button type="submit" class="btn btn-primary"> Submit and return to MTurk</button>
         </form>
+        <br><br>
+        Thank you for your participation : )
       </div>
       <!-- END thank you page -->
 
