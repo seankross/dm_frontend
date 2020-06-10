@@ -108,7 +108,7 @@ function main() {
       }
     }
 
-    logger("condition: " + condition);
+    logger("condition: " + condition + " out of " + condition_set);
 
     // show consent form
     $('#consent').show();
@@ -144,9 +144,9 @@ function hide_all() {
     $('#granular').hide()
 
     // neue pages
-    $('#is_same_dataset').hide();
-    $('#explain').hide();
-    $('#bye').hide();
+    // $('#is_same_dataset').hide();
+    // $('#explain').hide();
+    // $('#bye').hide();
 }
 
 function show_submit_page(){
@@ -204,19 +204,40 @@ function show_submit_page(){
 
 function validate_forms() {
     // set error message placement
-    $.validator.setDefaults({
-	errorPlacement: function(error, element) {
-	    if (element.next().prop('tagName') == 'SELECT')
-		error.insertAfter(element.next());
-	    else if (element.attr('type') === 'radio')
-		error.appendTo(element.parent());
-	    //else if (element.attr("type") == "checkbox")
-	    //	error.insertBefore(element);
-	    else
-		error.insertBefore(element);
-		//error.insertAfter(element);
-	}
-    });
+    if (jQuery.validator) {
+      jQuery.validator.setDefaults({
+        errorPlacement: function(error, element) {
+          if (element.next().prop('tagName') == 'SELECT'){
+            error.insertAfter(element.next());
+          } else if (element.attr('type') === 'radio'){
+            // error.appendTo(element.parent());
+            	error.insertBefore(element);
+          } else {
+            error.insertBefore(element);
+          }
+        }
+      });
+    }
+
+    function getWordCount(wordString) {
+      var words = wordString.split(" ");
+      words = words.filter(function(words) {
+        return words.length > 0
+      }).length;
+      return words;
+    }
+
+    //add the custom validation method
+    jQuery.validator.addMethod("wordCount",
+    function(value, element, params) {
+      var count = getWordCount(value);
+      if(count >= params[0]) {
+        return true;
+      }
+    },
+    jQuery.validator.format("Please enter more than {0} words.")
+  );
+
 
     $('#consent_form').validate({
       rules: {
@@ -231,6 +252,15 @@ function validate_forms() {
       rules: {
         optradio1: {
           required: true
+        }
+      }
+    });
+
+    $('#explanation_form').validate({
+      rules: {
+        explanation:{
+          required: true,
+          wordCount: ['10']
         }
       }
     });
@@ -367,6 +397,7 @@ function submit_is_same_dataset(){
 
 function submit_explain(){
   $('#explain').slideUp(function(){
+    $('#is_same_dataset').hide();
     $("#bye").show();
   });
 }

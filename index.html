@@ -144,10 +144,10 @@
               </p>
               <form id="is_same_dataset_form" action="javascript:submit_is_same_dataset();">
                 <div class="form-group row">
-                  <label for="optradio1" class="error" style="display:none;">
-                      * Please pick an option below
-                  </label>
                   <div class="radio">
+                  <!-- <label for="optradio1" class="error" style="display:none;">
+                      * Please pick an option below
+                  </label> -->
                     <label><input type="radio" name="optradio1">Yes</label>
                   </div>
                   <div class="radio">
@@ -195,11 +195,10 @@
                 Please think of an explanation and type in the box below. It’s ok if you are stumped, but please try to tell us your thinking process, even if you think it’s wrong. We would like a few sentences of explanation.
                 <br><br>
               </p>
-              <form id="is_same_dataset_form" action="javascript:submit_explain();">
+              <form id="explanation_form" action="javascript:submit_explain();">
                 <div class="form-group">
-                  <label for="exampleFormControlTextarea1">This is the main point of this experiment. Please take it seriously.</label>
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="5">
-                  </textarea>
+                  <label for="explanation">This is the main point of this experiment. Please take it seriously.</label>
+                  <textarea class="form-control" id="explanation" name="explanation" rows="5"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit and finish study</button>
               </form>
