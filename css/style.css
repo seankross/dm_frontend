@@ -84,3 +84,7 @@ label.error {
 body{
   font-size: 15px;
 }
+
+.fixed-bottom{
+  height: 100px
+}
