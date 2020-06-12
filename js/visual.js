@@ -85,6 +85,7 @@ function hide_all() {
     $('#consent').hide();
 
     // neue pages
+    $('#survey_intro').hide();
     $('#is_same_dataset').hide();
     $('#explain').hide();
     $('#bye').hide();
@@ -157,9 +158,15 @@ function validate_forms() {
 
 function submit_consent() {
   $('#consent').slideUp(function() {
-    $('#is_same_dataset').show();
+    $('#survey_intro').show();
     ts_is_same_dataset_start = getDateTime();
     logger("ts_is_same_dataset_start: " + ts_is_same_dataset_start );
+  });
+}
+
+function submit_survey_intro() {
+  $('#survey_intro_form').slideUp(function(){
+    $('#is_same_dataset').show();
   });
 }
 
@@ -191,7 +198,8 @@ function log_explanation(){
     workerId: worker_id,
     hitId: hit_id,
     condition: condition,
-    is_same_dataset_choice: is_same_dataset_choice,
+    // is_same_dataset_choice: is_same_dataset_choice,
+    is_impossible_choice: is_same_dataset_choice,
     explanation_text: explanation_text,
     ts_consent_start: ts_consent_start,
     ts_is_same_dataset_start: ts_is_same_dataset_start,

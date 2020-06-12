@@ -5,6 +5,7 @@ Each respondent worked in either industry (companies) or academia (colleges and 
 
 
 Each of the 3,000 respondents reported:
+
 * Work setting: Whether they worked in academia or industry at the time of the survey.
 * Degree: Their current education level (master's or phd degree).
 * Their current annual salary.

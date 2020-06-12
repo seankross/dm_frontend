@@ -127,23 +127,34 @@
             <a href="https://github.com/xiaoyingpu/dm_frontend/raw/master/static/consent_form.pdf" download>Consent form download </a>
           </div>
           <!-- END consent -->
+          <div id="survey_intro" class="col-sm-12" style="padding-top: 0px">
+            <div class="row">
+              <h1>
+                Salary survey: who makes more money?
+              </h1>
 
+              <p>Imagine that you are an analyst working for a think tank. You conducted a salary survey with 3,000 respondents in June 2018.</p>
+              <p>Each respondent worked in either industry (companies) or academia (colleges and universities) at the time of the survey. Also, each respondent had either a master’s or a PhD degree.</p>
+              <p>Each of the 3,000 respondents reported:</p>
+              <ul>
+              <li><span style="font-weight: bold">Work setting</span>: whether they worked in academia or industry at the time of the survey.</li>
+              <li><span style="font-weight: bold">Degree</span>: their current education level (master’s or phd degree).</li>
+              <li>Their current annual <span style="font-weight: bold">salary</span>.</li>
+              </ul>
+            </div>
+            <div class="row">
+              <form id=survey_intro_form action="javascript:submit_survey_intro();">
+                <input type=submit id=submit_survey_intro_btn value="I understand the survey, continue" class="btn btn-default" />
+              </form>
+            </div>
+          </div>
 
           <!-- BEGIN 1st page -->
           <div id="is_same_dataset" class="col-sm-12" style="padding-top: 0px">
-            <div class="row">
-              <h1>
-                Who makes more money?
-              </h1>
-
-              <p>
-                People with master's and PhD degrees often work in either industry (companies) or in academia (colleges and universities).
-                <br><br>
-                Imagine you were presented with the following two charts that show information about the salaries that people earn in different work settings and with different degrees. The charts were generated from a salary survey of 3,000 people. The points in each chart show average salaries and the bars represent margins of error (95% confidence intervals) around the averages.
-              </p>
-            </div>
 
             <div class="row">
+              <h2>Plotting survey data</h2>
+              <p>Your job is to explore the impact of work settings and degrees on salaries from this survey. Therefore you created two charts, shown below, to inspect data from all 3,000 respondents. The points in each chart show average salaries and the bars represent margins of error (95% confidence intervals) around the averages.</p>
               <div class="col-sm-5">
                 <img src="https://github.com/xiaoyingpu/dm_frontend/blob/master/img/salary-by-degree.png?raw=true"
                 class="img-responsive" alt="Responsive image"/>
@@ -169,16 +180,16 @@
               onSubmit = "return log_is_same_dataset();">
               <div class="form-group col-sm-12">
                 <p> <br>
-                  Given the trends in the two charts, is it possible that these two charts are made up of the exact same data, just grouped differently?
+                  Note the opposite trends in the two plots. Does it seem impossible to you that the results would come out this way?
                 </p>
                 <div class="radio">
                   <!-- <label for="optradio1" class="error" style="display:none;">
                   * Please pick an option below
                 </label> -->
-                <label><input type="radio" name="optradio1" value="1">Yes</label>
+                <label><input type="radio" name="optradio1" value="impossible">Yes, it seems impossible.</label>
               </div>
               <div class="radio">
-                <label><input type="radio" name="optradio1" value="0">No</label>
+                <label><input type="radio" name="optradio1" value="possible">No, it does look possible.</label>
               </div>
               <input class="btn btn-primary" type="submit" value="Submit">
             </div>
