@@ -211,30 +211,16 @@
         Even if you have no idea how it's possible, we want you to guess something (do not say "I don't know"), even if you feel it is wrong. We would like a few sentences of explanation; low-effort answers may be rejected.
         <br><br>
         <!-- </p> -->
-        <form id="explanation_form" action="javascript:submit_explain();" onSubmit="return log_explanation();">
+        <form id="explanation_form" method="post" onSubmit="return log_explanation();">
           <div class="form-group">
             <label for="explanation">This is the main point of this experiment. Please take it seriously.</label>
             <textarea class="form-control" id="explanation" name="explanation" rows="5"></textarea>
+          <button type="submit" class="btn btn-primary"> Submit and return to MTurk</button>
           </div>
-          <button type="submit" class="btn btn-primary"> Submit explanation</button>
         </form>
+
       </div>
       <!-- END explain -->
-
-      <!-- BEGIN thank you page -->
-      <div id="bye" class="col-sm-12" style="padding-top: 0px">
-        <h1>
-          You must click below to complete the study
-        </h1>
-
-        <br><br>
-        <form id="to_turk" method="post">
-          <button type="submit" class="btn btn-primary"> Submit and return to MTurk</button>
-        </form>
-        <br><br>
-        Thank you for your participation : )
-      </div>
-      <!-- END thank you page -->
 
     </div>
     <div class="fixed-bottom"> </div>

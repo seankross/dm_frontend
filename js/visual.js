@@ -90,36 +90,6 @@ function hide_all() {
     $('#bye').hide();
 }
 
-function show_submit_page(){
-    // if (elicitation == "bdm")
-	  //  $('bdm_thanks').show();
-
-    // $('#final_submit').show()
-    $('#bye').show();
-    $('form#to_turk').attr('action', submit_to + '/mturk/externalSubmit');
-
-    logger('assignment is ' + assignment_id);
-    ts_submitted = getDateTime();
-
-    params = {
-      assignmentId: assignment_id,
-      workerId: worker_id,
-      hitId: hit_id,
-      condition: condition,
-      is_same_dataset_choice: is_same_dataset_choice,
-      explanation_text: explanation_text,
-      ts_consent_start: ts_consent_start,
-      ts_is_same_dataset_start: ts_is_same_dataset_start,
-      ts_explain_start: ts_explain_start,
-      ts_submitted_: ts_submitted, // if you change it to ts_submitted instead of ts_submitted_ this will break
-    };
-    logger(params);
-
-    $.each(params, function (name, val) {
-      $('form#to_turk').append('<input type=hidden name="' + name + '" value="' + val + '" />');
-    });
-}
-
 
 function validate_forms() {
     // set error message placement
@@ -183,24 +153,10 @@ function validate_forms() {
         }
       }
     });
-
-
-    // ======= END NEU =======
-
 }
 
 function submit_consent() {
   $('#consent').slideUp(function() {
-    // ts_bdm_start = getDateTime();
-    // //show_next_survey_question()
-    // table = wtp_table(1, 5, 1, type='not granular', currency='cashmoney')
-    // $('#wtptable').html(table)
-    // if (elicitation == 'bdm')
-    // $('#bdm').show();
-    // else if (elicitation == 'slider')
-    // $('#boulder').show();
-    // else
-    // hide_all();
     $('#is_same_dataset').show();
     ts_is_same_dataset_start = getDateTime();
     logger("ts_is_same_dataset_start: " + ts_is_same_dataset_start );
@@ -208,26 +164,14 @@ function submit_consent() {
 }
 
 
-
-
-
-
 function submit_is_same_dataset(){
   $('#is_same_dataset_wrapper').slideUp(function(){
     ts_explain_start = getDateTime();
     logger("ts_explain_start: " + ts_explain_start);
     $("#explain").show();
-    // show_submit_page();
   });
 }
 
-
-function submit_explain(){
-  $('#explain').slideUp(function(){
-    $('#is_same_dataset').hide();
-    show_submit_page();
-  });
-}
 
 function log_is_same_dataset(){
     is_same_dataset_choice = $("input[name='optradio1']:checked").val();
@@ -240,6 +184,25 @@ function log_explanation(){
   logger("explanation: " + explanation_text);
   ts_submitted = getDateTime();
   logger("ts_submitted: " + ts_submitted);
+
+  $('form#explanation_form').attr('action', submit_to + '/mturk/externalSubmit');
+  params = {
+    assignmentId: assignment_id,
+    workerId: worker_id,
+    hitId: hit_id,
+    condition: condition,
+    is_same_dataset_choice: is_same_dataset_choice,
+    explanation_text: explanation_text,
+    ts_consent_start: ts_consent_start,
+    ts_is_same_dataset_start: ts_is_same_dataset_start,
+    ts_explain_start: ts_explain_start,
+    ts_submitted_: ts_submitted, // if you change it to ts_submitted instead of ts_submitted_ this will break
+  };
+  logger(params);
+
+  $.each(params, function (name, val) {
+    $('form#explanation_form').append('<input type=hidden name="' + name + '" value="' + val + '" />');
+  });
   return true;
 }
 
